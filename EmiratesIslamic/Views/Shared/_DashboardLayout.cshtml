@@ -1,0 +1,656 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@*@inject SignInManager<IdentityUser> SignInManager*@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	@if (!ViewData.ContainsKey("title"))
+	{
+		<title>Emirates Islamic - Dashboard</title>
+	}
+	else
+	{
+		<title>Emirates Islamic - Dashboard - @ViewData["Title"]</title>
+	}
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+	      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap">
+	<link rel="stylesheet" href="/css/carousel-offer.css">
+	<link rel="stylesheet" href="/css/select2.min.css" media="screen">
+	<link rel="stylesheet" href="/css/style.css" asp-append-version="true">
+	
+	<style>
+		#sidebarMenu li.active {
+			background-color: var(--teal);
+			border-radius: 10px;
+		}
+
+		#sidebarMenu li.active a {
+			color: #FFF;
+		}
+	</style>
+	@await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+	
+<header>
+	<div class="container" data-swiftype-index="false">
+		<div class="row">
+			<div class="col-md-4 col-lg-4 d-none d-sm-none d-md-block header-left-block">
+				<ul>
+					<li class="locate-tab">
+						<a href="#" data-uw-rm-brl="false">LOCATE</a>
+					</li>
+					<li class="contact-tab">
+						<a href="#" data-uw-rm-brl="false">CONTACT</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-4 col-md-4 col-lg-4 text-md-center logo-section">
+				<a href="/" data-uw-rm-brl="false">
+					<span class="d-none d-md-block">
+						<img src="/images/emirates-islamic-logo.png" width="221" height="36" alt="Emirates Islamic"
+						     title="Emirates Islamic" data-uw-rm-ima-original="emirates islamic" />
+					</span>
+					<span class="d-block d-md-none">
+						<img src="/images/emirates-islamic-logo-mobile.png" width="40" height="36"
+						     alt="Emirates Islamic" title="Emirates Islamic"
+						     data-uw-rm-ima-original="emirates islamic" />
+					</span>
+				</a>
+			</div>
+			<div id="headerDiv" class="col-8 col-md-4 col-lg-4 text-right header-right-block">
+				<ul data-swiftype-index="false">
+					<li>
+						<i class="fa fa-search fa-lg search-input-icon " style="padding:20px; cursor:pointer;"
+						   id="icon_search" onclick="openSearchNav()" data-uw-rm-kbnav="click"></i>
+					</li>
+					@{
+						//var adminOrEmployee = SignInManager.IsSignedIn(User);
+						var adminOrEmployee = true;
+						if (adminOrEmployee)
+						{
+									<li class="lang-tab d-none d-md-block">
+										<a asp-controller="Dashboard" asp-action="Index" style="cursor:pointer" data-uw-rm-kbnav="click">Dashboard</a>
+									</li>
+						}
+						else
+						{
+									<li class="lang-tab d-none d-md-block">
+										<a href="#" style="cursor:pointer" data-uw-rm-kbnav="click">عربي</a>
+									</li>
+						}
+					}
+					
+
+					<li class="login-tab">
+						<a id="loginDiv" href="javascript:void(0);" onclick="loginClick()" data-uw-rm-brl="exc"
+						   data-uw-rm-kbnav="click">LOG IN</a>
+						<div id="myLogin" class="login-block">
+							<ul class="login-list">
+								<li class="online-banking-tab">
+									<a href="#" data-uw-rm-brl="false">Online Banking</a>
+								</li>
+								<li>
+									<a href="#" data-uw-rm-brl="false">
+										<i class="fa fa-angle-right fa-2x"
+										   style="font-weight: bold; font-size:2.2em"></i>
+										businessONLINE
+									</a>
+								</li>
+							</ul>
+							<div class="login-ad download-app">
+								<h5>Have you tried our Mobile Banking App?</h5>
+								<a href="#"
+								   data-uw-rm-brl="false"><img src="/images/mobile-banking-app-ad.jpg" width="300"
+								                               height="220" alt="Mobile Banking App" title="Mobile Banking App"
+								                               data-uw-rm-ima-original="mobile banking app"></a>
+								<ul class="mt-3">
+									<li>
+										<a href="https://play.google.com/store/apps/details?id=com.s4m"
+										   target="_blank"
+										   aria-label="get it on google play - target website may not be available - opens in new tab"
+										   data-uw-rm-brl="true" data-uw-rm-ext-link=""
+										   uw-rm-external-link-id="https://play.google.com/store/apps/details?id=com.s4m$getitongoogleplay-targetwebsitemaynotbeavailable"><img
+											                                                                                                                                   src="/images/google-play-badge.png" alt="Get it on Google Play"
+											                                                                                                                                   title="Get it on Google Play" width="145" height="43"
+											                                                                                                                                   class="app-badge"
+											                                                                                                                                   data-uw-rm-ima-original="get it on google play"></a>
+									</li>
+									<li>
+										<a href="https://itunes.apple.com/app/apple-store/id516976912?pt=1088222&amp;ct=App%20on%20website&amp;mt=8"
+										   target="_blank" data-uw-rm-brl="false"
+										   aria-label="Download on the App Store - opens in new tab"
+										   data-uw-rm-ext-link=""
+										   uw-rm-external-link-id="https://itunes.apple.com/app/apple-store/id516976912?pt=1088222&amp;ct=app%20on%20website&amp;mt=8$downloadontheappstore"><img
+											                                                                                                                                                     src="/images/app-store-badge.png" width="145" height="50"
+											                                                                                                                                                     alt="Download on the App Store" title="Download on the App Store"
+											                                                                                                                                                     class="app-badge"
+											                                                                                                                                                     data-uw-rm-ima-original="download on the app store"></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="menu-tab">
+						<a id="menuDiv" href="javascript:void(0);" class="openbtn" onclick="openNav()"
+						   data-uw-rm-brl="exc" data-uw-rm-kbnav="click">MENU</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="container-fluid">
+	<div class="row">
+		<nav id="sidebarMenu" class="col-md-2 d-md-block bg-light">
+			<div class="position-sticky pt-3">
+				<ul class="nav flex-column">
+					@{
+						var actionLinks = new List<Dictionary<string, string>>()
+						{
+							new()
+							{
+								{ "controller", nameof(DashboardController) },
+								{ "action", nameof(DashboardController.Index) },
+								{ "title", "Dashboard" }
+							},
+							new()
+							{
+								{ "controller", nameof(FunctionsController) },
+								{ "action", nameof(FunctionsController.Index) },
+								{ "title", "Functions" }
+							},
+							new()
+							{
+								{ "controller", nameof(ProductsController) },
+								{ "action", nameof(ProductsController.Index) },
+								{ "title", "Products" }
+							},
+							new()
+							{
+								{ "controller", nameof(OffersController) },
+								{ "action", nameof(OffersController.Index) },
+								{ "title", "Offers" }
+							}
+						};
+						for (var i = 0; i < actionLinks.Count; i++)
+							actionLinks.ElementAt(i)["controller"] = actionLinks.ElementAt(i)["controller"].Split("Controller")[0];
+						
+						var currentController = ViewContext.ActionDescriptor.RouteValues["controller"];
+						var currentAction = ViewContext.ActionDescriptor.RouteValues["action"];
+
+						foreach (var actionLink in actionLinks)
+						{
+							var className =
+								actionLink["controller"] == currentController &&
+								actionLink["action"] == currentAction ?
+									"active" : string.Empty;
+							<li class="@className">
+								<a class="nav-link" asp-controller="@actionLink["controller"]" asp-action="@actionLink["action"]">@actionLink["title"]</a>
+							</li>
+							<li>
+								<hr style="width: 100%;"/>
+							</li>
+						}
+					}
+				</ul>
+			</div>
+		</nav>
+		<main class="col-md-10 container">
+			<div class="toast-container position-fixed end-0 p-3" style="height: 0px;top: 60px !important;right: 0;width: 400px;">
+				<div class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="toast-header">
+						<img src="/images/emirates-islamic-logo.png" style="width: 150px;" class="rounded me-2" alt="Emirates Islamic">
+						<small class="text-muted" style="position: fixed;right: 30px;">Now</small>
+						<button type="button" id="toastBtn" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="position: fixed; right: 5px; border: none; background-color: snow;">X</button>
+					</div>
+					<div class="toast-body" id="notification"></div>
+				</div>
+			</div>
+			@RenderBody()
+		</main>
+	</div>
+</div>
+
+	<div id="SearchPanel" class="sidepanel" data-swiftype-index="false"
+		style="padding-top: 0px; width: 0%; height: 0%;">
+		<header class="d-none d-sm-block w-100">
+			<div class="container" data-swiftype-index="false">
+				<div class="row">
+					<div class="col-md-4 col-lg-4 d-none d-sm-none d-md-block header-left-block">
+						<ul>
+							<li class="locate-tab"> <a href="#" data-uw-rm-brl="false">LOCATE</a> </li>
+							<li class="contact-tab"> <a href="#" data-uw-rm-brl="false">CONTACT</a> </li>
+						</ul>
+					</div>
+					<div class="col-5 col-md-4 col-lg-4 text-md-center logo-section">
+						<a href="/" data-uw-rm-brl="false">
+							<span class="d-none d-md-block">
+								<img src="/images/emirates-islamic-logo.png" width="221" height="36"
+									alt="Emirates Islamic" title="Emirates Islamic"
+									data-uw-rm-ima-original="emirates islamic">
+							</span>
+							<span class="d-block d-md-none">
+								<img src="/images/emirates-islamic-logo-mobile.png" width="40" height="36"
+									alt="Emirates Islamic" title="Emirates Islamic"
+									data-uw-rm-ima-original="emirates islamic">
+							</span>
+						</a>
+					</div>
+					<div id="headerDiv" class="col-7 col-md-4 col-lg-4 text-right header-right-block">
+						<button type="button" class="close d-none d-md-block" aria-label="Close"
+							onclick="closeSearchNav()" style="margin-top: 9px;margin-bottom: 9px;"
+							data-uw-rm-kbnav="click">
+							<span aria-hidden="true" style="padding-top: 9px;">×</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			<div class="clearfix d-none d-md-block"></div>
+			<div class="row">
+				<div class="col-md-12 col-lg-12" style="margin-top:20px;">
+					<form name="frm_search" method="post" id="frm_search" action="##">
+						<i class="fa fa-search fa-lg search-input-icon" id="search_icon"
+							style="float: right;position: absolute;top: 30%;right: 26px; cursor:pointer"></i>
+						<input type="text" id="txt_search" class="form-control input-lg" value=""
+							placeholder="Search here" style="width:100%" aria-label="search here" data-uw-rm-form="fx">
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-lg-12" style="padding-top:23px; display:none" id="loader_gif">
+					<center>
+						<img src="/images/loader.gif" role="presentation" data-uw-rm-ima="ai">
+					</center>
+				</div>
+			</div>
+			<div class="row freq_search">
+				<div class="col-md-12 col-lg-12" style="margin-top:20px;">
+					<div class="row">
+						<div class="col-md-3 col-lg-3"></div>
+						<div class="col-md-6 col-lg-6" style="text-align:center;">
+							<div class="key-benefits" style="padding:0px;">
+								<div class="container">
+									<h2 style="margin:0px; font-size:20px;">Most Frequent Searches</h2>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-lg-3"></div>
+					</div>
+					<div class="row" style="margin-top:20px; padding:8px">
+						<div class="col-md-3 col-lg-3"></div>
+						<div class="col-md-3 col-lg-3" style="text-align:left; font-size:15px; padding:8px">
+							<i class="fa fa fa-arrow-right fa-md search-input-icon" id="search_icon"
+								style="color:#f36c21">
+							</i>
+							<a href="#" class="search_atag" data-uw-rm-brl="false">Update my Emirates
+								ID</a>
+						</div>
+						<div class="col-md-1 col-lg-1"></div>
+						<div class="col-md-3 col-lg-3" style="text-align:left; font-size:15px; padding:8px">
+							<i class="fa fa fa-arrow-right fa-md search-input-icon" id="search_icon"
+								style="color:#f36c21">
+							</i>
+							<a href="#" class="search_atag" data-uw-rm-brl="false">Update
+								my KYC, FATCA, and CRS</a>
+						</div>
+						<div class="col-md-2 col-lg-2"></div>
+						<div class="col-md-3 col-lg-3"></div>
+						<div class="col-md-3 col-lg-3" style="text-align:left; font-size:15px; padding:8px">
+							<i class="fa fa fa-arrow-right fa-md search-input-icon" id="search_icon"
+								style="color:#f36c21">
+							</i>
+							<a href="#" class="search_atag" data-uw-rm-brl="false">Emirates Islamic SWIFT
+								Code</a>
+						</div>
+						<div class="col-md-1 col-lg-1"></div>
+						<div class="col-md-3 col-lg-3" style="text-align:left; font-size:15px; padding:8px">
+							<i class="fa fa fa-arrow-right fa-md search-input-icon" id="search_icon"
+								style="color:#f36c21">
+							</i>
+							<a href="#" class="search_atag" data-uw-rm-brl="false">Key Facts
+								Statement</a>
+						</div>
+						<div class="col-md-2 col-lg-2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 col-lg-12" style="padding-top:23px" id="search_content"></div>
+		</div>
+	</div>
+
+<div id="mySidepanel" class="sidepanel" data-swiftype-index="false" style="width: 0px; height: 0px;">
+<div class="container">
+<button type="button" class="close d-none d-md-block" aria-label="Close" onclick="closeNav()"
+		data-uw-rm-kbnav="click">
+	<span aria-hidden="true">×</span>
+</button>
+<div class="clearfix d-none d-md-block"></div>
+<ul class="parent-menu d-md-none">
+	<li>
+		<a href="/" data-uw-rm-brl="false">Personal</a>
+	</li>
+</ul>
+<div class="row child-menu">
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Accounts</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Current Accounts</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Savings Accounts</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Deposits Accounts</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#" data-uw-rm-brl="false">Cards</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#" data-uw-rm-brl="false">Credit
+							Cards</a>
+					</li>
+					<li>
+						<a href="#" data-uw-rm-brl="false">Debit
+							Cards</a>
+					</li>
+					<li>
+						<a href="#" data-uw-rm-brl="false">Prepaid
+							Cards</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Corporate Credit Cards</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Finance</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Personal Finance</a>
+					</li>
+					<li>
+						<a href="#" data-uw-rm-brl="false">Auto
+							Finance</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Home Finance - Bina'a</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Home Finance - Manzili</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Commercial Property Finance</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Ways To Bank</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Online Banking</a>
+					</li>
+					<li>
+						<a href="#" data-uw-rm-brl="false">SMS
+							Banking</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Phone Banking</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Mobile banking Apps </a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Whatsapp banking</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Safe Deposit Lockers</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Useful Videos</a>
+					</li>
+					<li>
+						<a href="#" data-uw-rm-brl="false">Security Tips </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row child-menu mt-md-4 mb-md-4">
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Advantage Banking</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Wealth Solutions</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#" data-uw-rm-brl="false">Takaful</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Foreign Currency</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#/"
+						   data-uw-rm-brl="false">Money Exchange</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Money Transfer</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">QuickRemit to India</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">QuickRemit to Pakistan</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul>
+			<li>
+				<a class="dropdown-link" href="#"
+				   data-uw-rm-brl="false">Special Packages</a>
+				<a href="#" class="dropdown-caret dropdown-toggle" data-toggle="dropdown"
+				   data-uw-rm-brl="false" aria-label="www.emiratesislamic.ae" data-uw-rm-empty-ctrl="">
+					<b class="caret"></b>
+				</a>
+				<br role="presentation" data-uw-rm-sr="">
+				<ul class="sub-menu-child dropdown-menu">
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Salary transfer Packages</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Student Bundle Packages</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Job Starter Package</a>
+					</li>
+					<li>
+						<a href="#"
+						   data-uw-rm-brl="false">Emarati Package</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row sidepanel-bottom">
+	<div class="col-xl-9">
+		<ul class="menu-items" data-swiftype-index="false">
+			<li class="active d-none d-md-inline-block">
+				<a href="/" data-uw-rm-brl="false">Personal</a>
+			</li>
+			<li>
+				<a href="#" data-uw-rm-brl="false">Priority</a>
+			</li>
+			<li>
+				<a href="#" data-uw-rm-brl="false">Business</a>
+			</li>
+			<li>
+				<a href="#" data-uw-rm-brl="false">Corporate</a>
+			</li>
+			<li>
+				<a href="#" data-uw-rm-brl="false">Securities</a>
+			</li>
+		</ul>
+	</div>
+	<div class="col-xl-3 d-none d-md-block">
+		<div class="social-block mt-md-4 mt-xl-0 text-xl-right">
+			<ul data-swiftype-index="false">
+				<li>
+					<a href="https://www.facebook.com/emiratesislamic" class="fb-link"
+					   title="Follow on Facebook" data-uw-rm-brl="false">Follow on Facebook</a>
+				</li>
+				<li>
+					<a href="https://twitter.com/emiratesislamic" class="twitter-link"
+					   title="Follow on Twitter" data-uw-rm-brl="false">Follow on Twitter</a>
+				</li>
+				<li>
+					<a href="https://www.linkedin.com/company/34814?trk=tyah&amp;trkInfo=clickedVertical%3Acompany%2Cidx%3A2-1-4%2CtarId%3A1427634263536%2Ctas%3Aemirates+isl"
+					   class="linkedin-link" title="Follow on Linkedin" data-uw-rm-brl="exc">Follow on
+						Linkedin</a>
+				</li>
+				<li>
+					<a href="https://www.instagram.com/emiratesislamic" class="instagram-link"
+					   title="Follow on Instagram" data-uw-rm-brl="false">Follow on Instagram</a>
+				</li>
+				<li>
+					<a href="https://www.youtube.com/channel/UCdrZqwAbeRNTTkDhZcuNQ3Q" class="youtube-link"
+					   title="Follow on YouTube" data-uw-rm-brl="exc">Follow on YouTube</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col d-md-none">
+		<ul data-swiftype-index="false">
+			<li class="locate-tab">
+				<a href="#" data-uw-rm-brl="false">LOCATE</a>
+			</li>
+			<li class="contact-tab">
+				<a href="#" data-uw-rm-brl="false">CONTACT</a>
+			</li>
+			<li class="lang-tab">
+				<a href="#" data-uw-rm-kbnav="click">عربی</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+</div>
+
+<script src="/js/jquery3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+<script src="/js/script.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

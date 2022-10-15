@@ -1,0 +1,56 @@
+﻿@model OfferFormViewModel
+
+@{
+	var title = Model.Id == 0 ? "Create offer" : "Update offer";
+	ViewData["title"] = title;
+	var actionName = Model.Id == 0 ? 
+		nameof(OffersController.Create) : nameof(OffersController.Edit);
+}
+
+	<h2>@title</h2>
+	<div class="row">
+		<form class="col-md-6" asp-controller="Offers" asp-action="@actionName" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label asp-for="Title"></label>
+				<input asp-for="Title" class="form-control"/>
+				<span asp-validation-for="Title"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Text"></label>
+				<input asp-for="Text" class="form-control"/>
+				<span asp-validation-for="Text"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Image"></label>
+				<input asp-for="Image" type="file" class="form-control" accept=".png,.jpg,.jpeg"/>
+				<span asp-validation-for="Image"></span>
+			</div>
+			<input type="hidden" asp-for="Id"/>
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="reset" class="btn btn-secondary">Reset</button>
+		</form>
+		<div class="col-md-6" style="text-align: center;">
+			@{
+				if (Model.Id != 0)
+				{
+						<p class="h1">Previous Image</p>
+						<img src="\@Model.ImagePath" alt="@Model.Title"/>
+				}
+			}
+		</div>
+	</div>
+
+@section Styles
+{
+	<style>
+		.field-validation-error {
+			color: #F00;
+		}
+	</style>
+}
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial"/>
+	<script src="/js/customValidators.js" asp-append-version="true"></script>
+}

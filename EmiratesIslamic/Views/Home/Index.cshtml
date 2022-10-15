@@ -1,3 +1,388 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomeViewModel
+
+@{
+	ViewData["Title"] = "Home";
 }
+
+@section Styles
+{
+	<link rel="stylesheet" href="/css/home.css" asp-append-version="true">
+}
+
+<div class="home-slider">
+		<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="false" data-touch="true"
+			data-keyboard="true"> <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
+				data-slide="prev" data-uw-rm-brl="false" data-uw-rm-kbnav="role" tabindex="0"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next"
+				data-uw-rm-brl="false" data-uw-rm-kbnav="role" tabindex="0"> <span class="carousel-control-next-icon"
+					aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/images/Skywards_Cards_Campaign_08092022_1920x650_EN.jpg"
+						class="d-none d-sm-block w-100" alt="Get up to 100,000 bonus Skywards Miles"
+						title="Get up to 100,000 bonus Skywards Miles"
+						data-uw-rm-ima-original="get up to 100,000 bonus skywards miles">
+					<img src="/images/Skywards_Cards_Campaign_08092022_600x500_EN.jpg"
+						class="d-sm-none w-100" alt="Get up to 100,000 bonus Skywards Miles"
+						title="Get up to 100,000 bonus Skywards Miles"
+						data-uw-rm-ima-original="get up to 100,000 bonus skywards miles">
+					<div class="carousel-content">
+						<div class="container">
+							<div class="row">
+								<div class="col-10 col-md-5 col-xl-4 offset-1 offset-xl-0 carousel-caption">
+									<h3>Get up to 100,000 bonus Skywards Miles</h3>
+									<p>Apply &amp; Fly with Emirates Islamic Skywards Credit Cards</p>
+									<a href="#"
+										class="btn btn-orange a_Home_learnmore" medium="website"
+										campaign="CCLSKY_100K_092022" content="mainbanner1_eng" source="homepage"
+										pos="1" data-uw-rm-brl="false">Apply Now »</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="/images/Travel_Campaign_Emarati_Family_Savings_Account_1920x650_EN.jpg"
+						class="d-none d-sm-block w-100" alt="Emarati Family Savings Account"
+						title="Emarati Family Savings Account" data-uw-rm-ima-original="emarati family savings account">
+					<img src="/images/Travel_Campaign_Emarati_Family_Savings_Account_600x500.jpg"
+						class="d-sm-none w-100" alt="Emarati Family Savings Account"
+						title="Emarati Family Savings Account" data-uw-rm-ima-original="emarati family savings account">
+					<div class="carousel-content">
+						<div class="container">
+							<div class="row">
+								<div class="col-10 col-md-5 col-xl-4 offset-1 offset-xl-0 carousel-caption">
+									<h3>Emarati Family Savings Account</h3>
+									<p>Save today and enjoy a better future.</p>
+									<a href="#"
+										class="btn btn-white-purple a_Home_learnmore" data-uw-rm-brl="false"> Learn More
+										»</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="/images/Businesswomen_Account_1920x650_EN.jpg"
+						class="d-none d-sm-block w-100" alt="Businesswomen Account" title="Businesswomen Account"
+						data-uw-rm-ima-original="businesswomen account">
+					<img src="/images/Businesswomen_Account_600x500.jpg"
+						class="d-sm-none w-100" alt="Businesswomen Account" title="Businesswomen Account"
+						data-uw-rm-ima-original="businesswomen account">
+					<div class="carousel-content">
+						<div class="container">
+							<div class="row">
+								<div class="col-10 col-md-5 col-xl-4 offset-1 offset-xl-0 carousel-caption">
+									<h3>Businesswomen Account</h3>
+									<p>Empower your ideas with the Emirates Islamic Businesswomen Account!</p>
+									<a href="#"
+										class="btn btn-white-purple a_Home_learnmore" data-uw-rm-brl="false"> Learn More
+										»</a>
+									<a href="#"
+										class="btn btn-orange a_Home_learnmore" data-uw-rm-brl="false">Apply Now »</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="/images/main-visual_1920x650_En.jpg"
+						class="d-none d-sm-block w-100" alt="Innovations" title="Innovations"
+						data-uw-rm-ima-original="innovations">
+					<img src="/images/main-visual_600x500.jpg"
+						class="d-sm-none w-100" alt="Innovations" title="Innovations"
+						data-uw-rm-ima-original="innovations">
+					<div class="carousel-content">
+						<div class="container">
+							<div class="row">
+								<div class="col-10 col-md-5 col-xl-4 offset-1 offset-xl-0 carousel-caption">
+									<h3>Leading the way at Emirates Islamic</h3>
+									<p>Innovations that put you first</p>
+									<a href="#/" class="btn btn-white-purple a_Home_learnmore"
+										data-uw-rm-brl="false"> Learn More »</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+@if (Model.Functions.Any())
+{
+	<div class="products-offering">
+		<div class="jumbotron">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center" style="padding-bottom: 0px; padding-top: 0px;">
+						@if (Model.Functions.Count() > 6)
+						{
+							<span class="carousel-control-prev" href="#functionsCarousel" role="button"
+							      data-slide="prev" style="opacity: 1; cursor: pointer" data-uw-rm-kbnav="role" tabindex="0">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</span>
+							<span class="carousel-control-next" href="#functionsCarousel" role="button"
+							      data-slide="next" style="opacity: 1; cursor: pointer" data-uw-rm-kbnav="role" tabindex="0">
+								<span class="carousel-control-next-icon" aria-hidden="true"
+								      style="opacity: 1; cursor: pointer"></span>
+								<span class="sr-only">Next</span>
+							</span>
+						}
+						<div id="functionsCarousel" class="carousel slide carousel-fade" data-ride="false"
+						     data-touch="true" data-keyboard="true" data-interval="false">
+							<div id="carousel-inner" class="carousel-inner">
+								@{
+									var productsOfferingCount = Model.Functions.Count();
+									var carouselItemsCount = productsOfferingCount / 6 == 0 ?
+										productsOfferingCount / 6 : productsOfferingCount / 6 + 1;
+
+									var currentIndex = 0;
+									@for (var i = 0; i < carouselItemsCount; i++)
+									{
+										var itemsDifferences = productsOfferingCount - currentIndex;
+										@if (itemsDifferences < 6)
+										{
+											currentIndex = productsOfferingCount - 6;
+										}
+
+										<div class="carousel-item">
+											<div class="row">
+												@{var round = 0;}
+												@while (currentIndex < productsOfferingCount && round < 6)
+												{
+													<div class="col-6 col-sm-4 col-md-2">
+														<h3>
+															<a
+																href="#" data-uw-rm-brl="false">
+																<img src="@Model.Functions.ElementAt(currentIndex).ImagePath" alt="@Model.Functions.ElementAt(currentIndex).Name"/>
+																@Model.Functions.ElementAt(currentIndex++).Name
+															</a>
+														</h3>
+													</div>
+													round++;
+												}
+
+											</div>
+										</div>
+									}
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+	<div class="most-popular grey-bg">
+		<div class="container">
+			<h2>Popular products</h2>
+			<div class="card-deck" id="popular-products">
+				@foreach (var product in Model.Products)
+				{
+					<div class="card popular-product">
+						<img src="@product.ImagePath" alt="@product.Title" title="@product.Title"
+						     width="264" height="180" data-uw-rm-ima-original="@product.Title">
+						<div class="card-body">
+							<h3>
+								<a asp-controller="ReadProducts" asp-action="GetById" asp-route-id="@product.Id"
+								   data-uw-rm-brl="false">@product.Title</a>
+							</h3>
+							<p class="card-text">@product.Text</p>
+						</div>
+						<div class="card-footer">
+							<a asp-controller="ReadProducts" asp-action="GetById" asp-route-id="@product.Id"
+							   class="btn btn-ghost mr-2 a_learnmore"
+							   list="Popular Products"
+							   data-uw-rm-brl="false" aria-label="Learn More Apply Now »"
+							   uw-rm-vague-link-id="#"
+							   data-uw-rm-vglnk="" style="transition: all 0s ease 0s;">Learn More</a>
+							<a asp-controller="ReadProducts" asp-action="GetById" asp-route-id="@product.Id" class="btn btn-orange"
+							   data-uw-rm-brl="false">Apply Now »</a>
+						</div>
+					</div>
+				}
+				<div class="card popular-product fx-block">
+					<h3>Currency Rate</h3>
+					<div class="card-body">
+						<form name="currencyform">
+							<select id="curr_1"
+							        class="currency-converter-currency js-example-templating js-states w100 currency_dd select2-hidden-accessible"
+							        tabindex="-1" aria-hidden="true" aria-label="select" data-uw-rm-form="fx">
+							</select>
+						</form>
+						<p class="text-center" style="margin-top: 25px;">
+							<img src="/images/flags/USD.png" alt="United States Flag" title="United States Flag"
+							     width="70" height="38" class="flag" data-uw-rm-ima-original="united states flag">
+						</p>
+						<p class="currency-value text-center">
+							<b>1
+								<span id="currency_selected">USD</span>
+							</b> =
+							<span id="AED_Conversion">3.653</span>
+							AED
+						</p>
+						<p class="currency-value text-center">
+							<b>1
+								<span id="currency_selected_reverse">AED</span>
+							</b> =
+							<span id="AED_to_OtherConversion">0.271</span>
+							<span id="currency_choosen">USD</span>
+						</p>
+						<p class="fine text-center" style="margin-bottom: 0px;">*Rates are indicative only.</p>
+					</div>
+					<div class="card-footer text-center">
+						<a href="#"
+						   class="btn btn-large orange-text a_learnmore" id="Currency Rate" subcat="Foreign Currency"
+						   pos="4" cat="Foreign Currency" list="Popular Products" data-uw-rm-brl="false">Currency
+							Converter »</a>
+					</div>
+				</div>
+			</div>
+			<p class="text-right font-weight-bold m-3 ">
+				<a asp-controller="ReadProducts" asp-action="Index" data-uw-rm-brl="false">
+					<u>More Products »</u>
+				</a>
+			</p>
+		</div>
+	</div>
+
+@if (Model.Offers.Any())
+{
+	<div class="wrapper white-bg strategic-campaign-new">
+		<div class="container more-offers" style="margin-top:0px;">
+			<h2>Latest offers</h2>
+			<div id="carousel-example-multi" class="carousel slide carousel-fade carousel-multi-item v-2"
+			     data-touch="true" data-keyboard="true">
+				<div id="offers-carousel-inner" class="carousel-inner row v-2" role="listbox">
+					<div class="carousel-item active">
+						@foreach (var offer in Model.Offers)
+						{
+							<div class="col-12 col-md-4">
+								<div class="offer-block">
+									<img src="@offer.ImagePath" alt="@offer.Title" title="@offer.Title"
+									     data-uw-rm-ima-original="@offer.Title">
+									<div class="panel-overlay p-3">
+										<h3>@offer.Title</h3>
+										<div class="content-panel">
+											<p>@offer.Text</p>
+											<a asp-controller="ReadOffers" asp-action="GetById" asp-route-id="@offer.Id" class="btn btn-orange" data-uw-rm-brl="false">Know More »</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			<p class="text-right font-weight-bold m-3 ">
+				<a asp-controller="ReadOffers" asp-action="Index" data-uw-rm-brl="false">
+					<u>More Promotions »</u>
+				</a>
+			</p>
+		</div>
+	</div>
+}
+
+<div class="container-fluid grey-bg">
+		<div class="col-lg-12 covidsection">
+			<div class="covidsection2" style="padding-top:10px; padding-bottom:10px;">
+				<h2 style="margin-bottom: 10px; color:#461e57;">Consumer Education and Awareness</h2>
+				<p style="margin-bottom: 10px;">As an Islamic bank, we have always been transparent in all our dealings
+					with our customers. </p>
+				<p style="margin-bottom: 15px;">In our Consumer Education and Awareness section, you will get updates on
+					Key Facts related to our products, schedule of charges, Shariah concepts, security and fraud
+					awareness as well as articles on managing your finances better.</p>
+				<p>
+					<a href="#" class="btn btn-orange a_Home_learnmore" medium="website"
+						campaign="Key_Information" content="mainbanner3_eng" source="homepage" pos="3"
+						data-uw-rm-brl="false">Know More »</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container_ibor white-bg">
+		<div>
+			<img src="/images/home_announcement_ibor.jpg" class="d-none d-sm-block w-100 ibor_img" style="padding:20px;"
+				alt="a city skyline at night" data-uw-rm-ima="ai">
+			<img src="/images/home_announcement_ibor_600x500.jpg" class="d-sm-none w-100"
+				alt="Stay Home. Stay Safe. Bank Digitally." title="Stay Home. Stay Safe. Bank Digitally."
+				data-uw-rm-ima-original="stay home. stay safe. bank digitally.">
+			<div class="container">
+				<div class="top-left" style="text-align: left;">
+					<p style="margin-bottom: 10px;">LIBOR transition</p>
+					<h2 style="margin-bottom: 10px; color:#fff;">Preparing for benchmark rate.</h2>
+					<p style="margin-bottom: 15px;">Find out more about LIBOR</p>
+					<p>
+						<a href="#"
+							style="color: #fff;font-weight: 600; text-decoration:underline" data-uw-pdf-br="1"
+							data-uw-pdf-doc="">Risk Disclosure »</a> &nbsp; &nbsp;&nbsp;&nbsp;
+						<a href="#"
+							style="font-weight: 600;color: #fff;text-decoration:underline" data-uw-pdf-br="1"
+							data-uw-pdf-doc="">FAQs »</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper grey-bg strategic-campaign-new">
+		<div class="container strategic-campaign-container pt-sm-3">
+			<div class="row">
+				<div class="col-md-6 strategic-left">
+					<div class="block ei-securities-block white-bg">
+						<h3>
+							<a href="http://www.eifb.ae/" data-uw-rm-brl="false">EI Securities</a>
+						</h3>
+						<p>Discover the trading platform.</p>
+						<a href="http://www.eifb.ae/" class="more-link" data-uw-rm-brl="false"
+							aria-label="More EI Securities" uw-rm-vague-link-id="http://www.eifb.ae/$more"
+							data-uw-rm-vglnk="">More</a>
+					</div>
+					<div class="block kyc-block white-bg">
+						<h3>
+							<a href="#" data-uw-rm-brl="false">Update KYC details</a>
+						</h3>
+						<a href="#" class="more-link" data-uw-rm-brl="false"
+							aria-label="More Update KYC details"
+							uw-rm-vague-link-id="https://www.emiratesislamic.ae/eng/kyc/$more"
+							data-uw-rm-vglnk="">More</a>
+					</div>
+					<div class="block financial-info-block white-bg">
+						<h3>
+							<a href="#" data-uw-rm-brl="false">COVID-19 related updates</a>
+						</h3>
+						<p>We want to assure you that our utmost priority is to ensure your safety whilst banking with
+							us and to continue providing you with our highest quality of service.</p>
+						<a href="#" class="more-link" data-uw-rm-brl="false"
+							aria-label="More COVID-19 related updates"
+							uw-rm-vague-link-id="https://www.emiratesislamic.ae/eng/about-us/staysafe/$more"
+							data-uw-rm-vglnk="">More</a>
+					</div>
+				</div>
+				<div class="col-md-6 strategic-right">
+					<div class="strategic-promo">
+						<a href="#" data-uw-rm-brl="false">
+							<img src="/images/EI_Promotions_650x360.jpg" alt="Emirates Islamic Promotions"
+								title="Emirates Islamic Promotions" width="650" height="360"
+								data-uw-rm-ima-original="emirates islamic promotions">
+							<h3>Promotions »</h3>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	 @section Scripts
+	 {
+		 <script type="text/javascript" src="/js/select2.min.js"></script>
+		 <script src="/js/home.js" asp-append-version="true"></script>
+	 }

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Function>
+
+@{
+	ViewData["title"] = "Functions list";
+}
+
+	<h2>Functions</h2>
+
+	<a class="btn btn-primary" role="button" asp-controller="Functions" asp-action="Create">New</a>
+
+	@if (Model.Any())
+	{
+		<table class="table" id="functions">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Image</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var function in Model)
+			{
+				<tr id="function_@function.Id">
+					<td>@function.Id</td>
+					<td>@function.Name</td>
+					<td style="width: 33%;">
+						<img src="\@function.ImagePath" alt="@function.Name"/>
+					</td>
+					<td>
+						<a role="button" asp-controller="Functions" asp-action="Edit" asp-route-id="@function.Id" class="btn btn-warning mr-3">Edit <i class="fa fa-edit"></i></a>
+						<a role="button" href="#" class="btn btn-secondary" data-id="@function.Id">Delete <i class="fa fa-trash"></i></a>
+					</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+
+		<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Confirm delete</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p></p>
+					</div>
+					<div class="modal-footer">
+						<button id="confirmDelete" type="button" class="btn btn-primary">Yes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="deleteLink"/>
+		</div>
+	}
+	else
+	{
+		<p>There is no functions yet</p>
+	}
+
+@section Styles
+{
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+	<style>
+		img {
+			max-height: 100px;
+		}
+	</style>
+}
+
+@section Scripts
+{
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+	<script>
+		$ = window.$;
+		$(document).ready(function() {
+			if ($("#functions").length) {
+				var dataTable = $('#functions').DataTable();
+
+				$(".btn-secondary").on("click",
+					function(e) {
+						e.preventDefault();
+						const functionId = $(this).attr("data-id");
+						$("#deleteLink").val(functionId);
+						const name = $(this).parents("tr").find("td:eq(1)").text();
+						$(".modal-body p").text(`Are you sure to delete ${name}?`);
+						$('#deleteModal').modal('show');
+					});
+
+				$("#confirmDelete").on("click",
+					function(e) {
+						e.preventDefault();
+						const functionId = $("#deleteLink").val();
+						$.ajax({
+							async: false,
+							url: `/api/functions/${functionId}`,
+							method: 'DELETE',
+							statusCode: {
+								404: function() {
+									$('#deleteModal').modal('toggle');
+									$("#notification").text("Function not found");
+									$('.toast').toast('show');
+								},
+								500: function() {
+									$('#deleteModal').modal('toggle');
+									$("#notification").text("There is server error, please try again later.");
+									$('.toast').toast('show');
+								},
+								200: function() {
+									dataTable.row(`#function_${functionId}`).remove().draw();
+									$('#deleteModal').modal('toggle');
+									$("#notification").text("Function deleted successfully.");
+									$('.toast').toast('show');
+								}
+							}
+						});
+					});
+			}
+		});
+	</script>
+}

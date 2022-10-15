@@ -1,0 +1,170 @@
+﻿@model Product
+
+@{
+	ViewData["title"] = Model.Title;
+}
+
+<div id="main">
+	<div id="content" class="clearfix">
+
+		<p></p>
+		<div class="cMT">
+			<div class="container">
+				<h1>@Model.Title</h1>
+			</div>
+		</div>
+		<script>
+		</script>
+		<div class="container w1190">
+			<div>
+				<div class="col-12">
+					<div class="thumbnail mLR10"><img src="\@Model.ImagePath" alt="@Model.Title" title="@Model.Title" data-uw-rm-ima-original="@Model.Title">
+						<div class="caption">
+							<h2 class="orangeBottom_h2">@Model.Text</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<p></p>
+			<p>&nbsp;</p>
+		</div>
+		<div id="aside" class="regionTwo" name="region"> </div>
+	</div>
+</div>
+
+@section Styles {
+	<style>
+		#content {
+			margin-bottom: 20px;
+		}
+
+		.cMT {
+			margin-top: 0!important;
+		}
+
+		h1 {
+			font-size: 1.7em;
+			font-weight: 700;
+			color: #ff6319;
+			margin: 25px 0;
+			padding-left: 25px;
+		}
+
+		h1, h2, h3, h4 {
+			vertical-align: middle;
+		}
+
+		.w1190 {
+			width: 1190px;
+		}
+
+		.col-md-4-custom {
+			position: relative;
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+		.col-md-4-custom {
+			float: left;
+			width: 33.3%;
+			padding: 0;
+			margin-bottom: 20px;
+			
+		}
+
+		@@media(max-width: 920px) {
+			.col-md-4-custom {
+				width: 50%;
+			}
+		}
+
+		@@media(max-width: 600px) {
+			.col-md-4-custom {
+				width: 80%;
+			}
+		}
+
+		.mLR10 {
+			width: 93%!important;
+		}
+		.mLR10 {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+		.thumbnail {
+			background-color: #fff;
+			padding: 20px;
+			min-height: 300px;
+			margin-bottom: 0;
+			float: left;
+			box-shadow: 0 0 15px 0 #ededed inset;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			
+		}
+
+		.thumbnail img {
+			max-width: 300px;
+			width: 100%;
+			transform: translateX(-50%);
+			margin-left: 50%;
+			height: 100%;
+			max-height: 400px;
+		}
+
+		.thumbnail .caption {
+			padding: 0;
+		}
+
+		.thumbnail h2 {
+			color: #421556;
+			font-size: 1.2em;
+			font-weight: 700;
+			padding-left: 0;
+			margin: 15px 0;
+		}
+
+		.orangeBottom_h2 {
+			color: #421556;
+			font-size: 1.2em;
+			font-weight: 700;
+			padding-left: 0;
+			margin: 15px 0;
+			padding-bottom: 9px;
+			border-bottom: 1px solid #ff6319;
+		
+		}
+		h2 {
+			font-size: 1.7em;
+			font-weight: 700;
+			color: #421556;
+			margin: 10px 0;
+		}
+		h1, h2, h3, h4 {
+			vertical-align: middle;
+		}
+
+		a.btn.btn-primary.a_Promo_learnmore {
+			background-color: #fff;
+			border-color: #ccc;
+			box-shadow: 0 0 3px 0 #d6d6d6 inset;
+			color: #421556;
+			padding: 6px 12px;
+			font-size: .99em;
+			margin-top: 5px;
+			margin-right: 5px;
+		}
+
+		body {
+			background-color: #ededed;
+		}
+
+		a.btn.btn-primary.a_Promo_learnmore:hover {
+			color: #fff !important;
+			background-color: #204d74 !important;
+			border-color: #122b40 !important;
+		}
+
+	
+	</style>
+}

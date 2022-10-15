@@ -1,0 +1,189 @@
+﻿@model IEnumerable<Offer>
+
+@{
+	ViewData["title"] = "Offers";
+}
+
+@if (Model.Any())
+{
+	
+<div id="main">
+<div id="content" class="clearfix">
+
+<p></p>
+<div class="cMT">
+	<div class="container">
+		<h1>Offers</h1>
+	</div>
+</div>
+<script>
+</script>
+<div class="container w1190">
+	<div>
+		@foreach (var offer in Model)
+		{
+			<div class="col-md-4-custom">
+				<div class="thumbnail mLR10"><img src="\@offer.ImagePath" alt="@offer.Title" title="@offer.Title" data-uw-rm-ima-original="@offer.Title">
+					<div class="caption">
+						<h2 class="orangeBottom_h2">@offer.Title</h2>
+						<p>@offer.Text</p>
+						<a asp-controller="ReadOffers" asp-action="GetById" asp-route-id="@offer.Id" class="btn btn-primary a_Promo_learnmore" ofrname="@offer.Title" ofrpos="1" role="button" data-uw-rm-brl="false" data-uw-rm-kbnav="role" tabindex="0" aria-label="Learn More @offer.Title" data-uw-rm-vglnk="">Learn More</a>
+					</div>
+				</div>
+
+			</div>
+		}
+	</div>
+	<p></p>
+	<p>&nbsp;</p>
+</div>
+<div id="aside" class="regionTwo" name="region"> </div>
+</div>
+</div>
+
+	}
+else
+{
+	<div id="main">
+		<div id="content" class="clearfix">
+
+			<p></p>
+			<div class="cMT">
+				<div class="container">
+					<h1>THere is no offers</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	}
+
+@section Styles
+{
+	<style>
+		.cMT {
+			margin-top: 0!important;
+		}
+
+		h1 {
+			font-size: 1.7em;
+			font-weight: 700;
+			color: #ff6319;
+			margin: 25px 0;
+			padding-left: 25px;
+		}
+
+		h1, h2, h3, h4 {
+			vertical-align: middle;
+		}
+
+		.w1190 {
+			width: 1190px;
+		}
+
+		.col-md-4-custom {
+			position: relative;
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+		.col-md-4-custom {
+			float: left;
+			width: 33.3%;
+			padding: 0;
+			margin-bottom: 20px;
+			height: 620px
+		}
+
+		@@media(max-width: 920px) {
+			.col-md-4-custom {
+				width: 50%;
+			}
+		}
+
+		@@media(max-width: 600px) {
+			.col-md-4-custom {
+				width: 80%;
+			}
+		}
+
+		.mLR10 {
+			width: 93%!important;
+		}
+		.mLR10 {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+		.thumbnail {
+			background-color: #fff;
+			padding: 20px;
+			min-height: 300px;
+			margin-bottom: 0;
+			float: left;
+			box-shadow: 0 0 15px 0 #ededed inset;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			height: 100%;
+		}
+
+		.thumbnail img {
+			max-height: 20vw;
+			width: 100%;
+		}
+
+		.thumbnail .caption {
+			padding: 0;
+		}
+
+		.thumbnail h2 {
+			color: #421556;
+			font-size: 1.2em;
+			font-weight: 700;
+			padding-left: 0;
+			margin: 15px 0;
+		}
+
+		.orangeBottom_h2 {
+			color: #421556;
+			font-size: 1.2em;
+			font-weight: 700;
+			padding-left: 0;
+			margin: 15px 0;
+			padding-bottom: 9px;
+			border-bottom: 1px solid #ff6319;
+			height: 90px;
+		}
+		h2 {
+			font-size: 1.7em;
+			font-weight: 700;
+			color: #421556;
+			margin: 10px 0;
+		}
+		h1, h2, h3, h4 {
+			vertical-align: middle;
+		}
+
+		a.btn.btn-primary.a_Promo_learnmore {
+			background-color: #fff;
+			border-color: #ccc;
+			box-shadow: 0 0 3px 0 #d6d6d6 inset;
+			color: #421556;
+			padding: 6px 12px;
+			font-size: .99em;
+			margin-top: 5px;
+			margin-right: 5px;
+		}
+
+		body {
+			background-color: #ededed;
+		}
+
+		a.btn.btn-primary.a_Promo_learnmore:hover {
+			color: #fff !important;
+			background-color: #204d74 !important;
+			border-color: #122b40 !important;
+		}
+
+		h2.orangeBottom_h2 + p {
+			height: 120px;
+		}
+	</style>
+}
