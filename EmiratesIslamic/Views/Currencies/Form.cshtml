@@ -1,0 +1,61 @@
+﻿@model Currency
+
+@{
+	const string title = "Update currency";
+	ViewData["title"] = title;
+}
+
+	<h2>@title</h2>
+	<div class="row">
+		<form class="col-md-6" asp-controller="Currencies" asp-action="Edit" method="post">
+			<div class="form-group">
+				<label asp-for="Code"></label>
+				<input asp-for="Code" class="form-control" readonly="readonly"/>
+				<span asp-validation-for="Code"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" readonly="readonly"/>
+				<span asp-validation-for="Name"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Buy"></label>
+				<input asp-for="Buy" type="number" class="form-control"/>
+				<span asp-validation-for="Buy"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Sell"></label>
+				<input asp-for="Sell" type="number" class="form-control"/>
+				<span asp-validation-for="Sell"></span>
+			</div>
+			<div class="form-group row" style="height: 100px;">
+				<div class="col-sm-12">Status</div>
+				<div class="col-sm-12">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" asp-for="IsAvailable" style="height: 25px; width: 25px;"/>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<span asp-validation-for="IsAvailable"></span>
+				</div>
+				
+			</div>
+			<input type="hidden" asp-for="Code"/>
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="reset" class="btn btn-secondary">Reset</button>
+		</form>
+	</div>
+
+@section Styles
+{
+	<style>
+		.field-validation-error {
+			color: #F00;
+		}
+	</style>
+}
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial"/>
+}

@@ -99,7 +99,7 @@
 								<div class="col-10 col-md-5 col-xl-4 offset-1 offset-xl-0 carousel-caption">
 									<h3>Leading the way at Emirates Islamic</h3>
 									<p>Innovations that put you first</p>
-									<a href="#/" class="btn btn-white-purple a_Home_learnmore"
+									<a href="#" class="btn btn-white-purple a_Home_learnmore"
 										data-uw-rm-brl="false"> Learn More »</a>
 								</div>
 							</div>
@@ -116,7 +116,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12 text-center" style="padding-bottom: 0px; padding-top: 0px;">
+					<div class="col-lg-12 text-center" style="padding-bottom: 0; padding-top: 0;">
 						@if (Model.Functions.Count() > 6)
 						{
 							<span class="carousel-control-prev" href="#functionsCarousel" role="button"
@@ -178,6 +178,8 @@
 	</div>
 }
 
+@if (Model.Products.Any() || Model.Currencies.Any())
+{
 	<div class="most-popular grey-bg">
 		<div class="container">
 			<h2>Popular products</h2>
@@ -200,48 +202,57 @@
 							   list="Popular Products"
 							   data-uw-rm-brl="false" aria-label="Learn More Apply Now »"
 							   uw-rm-vague-link-id="#"
-							   data-uw-rm-vglnk="" style="transition: all 0s ease 0s;">Learn More</a>
+							   data-uw-rm-vglnk="" style="transition: all 0 ease 0;">Learn More</a>
 							<a asp-controller="ReadProducts" asp-action="GetById" asp-route-id="@product.Id" class="btn btn-orange"
 							   data-uw-rm-brl="false">Apply Now »</a>
 						</div>
 					</div>
 				}
-				<div class="card popular-product fx-block">
-					<h3>Currency Rate</h3>
-					<div class="card-body">
-						<form name="currencyform">
-							<select id="curr_1"
-							        class="currency-converter-currency js-example-templating js-states w100 currency_dd select2-hidden-accessible"
-							        tabindex="-1" aria-hidden="true" aria-label="select" data-uw-rm-form="fx">
-							</select>
-						</form>
-						<p class="text-center" style="margin-top: 25px;">
-							<img src="/images/flags/USD.png" alt="United States Flag" title="United States Flag"
-							     width="70" height="38" class="flag" data-uw-rm-ima-original="united states flag">
-						</p>
-						<p class="currency-value text-center">
-							<b>1
-								<span id="currency_selected">USD</span>
-							</b> =
-							<span id="AED_Conversion">3.653</span>
-							AED
-						</p>
-						<p class="currency-value text-center">
-							<b>1
-								<span id="currency_selected_reverse">AED</span>
-							</b> =
-							<span id="AED_to_OtherConversion">0.271</span>
-							<span id="currency_choosen">USD</span>
-						</p>
-						<p class="fine text-center" style="margin-bottom: 0px;">*Rates are indicative only.</p>
+				@if (Model.Currencies.Any())
+				{
+					<div class="card popular-product fx-block">
+						<h3>Currency Rate</h3>
+						<div class="card-body">
+							<form name="currencyform">
+								<select id="curr_1"
+								        class="currency-converter-currency js-example-templating js-states w100 currency_dd select2-hidden-accessible"
+								        tabindex="-1" aria-hidden="true" aria-label="select" data-uw-rm-form="fx">
+									@foreach (var currency in Model.Currencies)
+									{
+										<option value="@currency.Code" data-buy="@currency.Buy" data-sell="@currency.Sell" id="currency_@currency.Code" flag="" curr_desc="">
+											@currency.Name
+										</option>
+									}
+								</select>
+							</form>
+							<p class="text-center" style="margin-top: 25px;">
+								<img src="/images/flags/USD.png" alt="United States Flag" title="United States Flag"
+								     width="70" height="38" class="flag" data-uw-rm-ima-original="united states flag">
+							</p>
+							<p class="currency-value text-center">
+								<b>1
+									<span id="currency_selected"></span>
+								</b> =
+								<span id="AED_Conversion"></span>
+								AED
+							</p>
+							<p class="currency-value text-center">
+								<b>1 AED
+									<span id="currency_selected_reverse"></span>
+								</b> =
+								<span id="AED_to_OtherConversion"></span>
+								<span id="currency_choosen"></span>
+							</p>
+							<p class="fine text-center" style="margin-bottom: 0;">*Rates are indicative only.</p>
+						</div>
+						<div class="card-footer text-center">
+							<a href="#"
+							   class="btn btn-large orange-text a_learnmore" id="Currency Rate" subcat="Foreign Currency"
+							   pos="4" cat="Foreign Currency" list="Popular Products" data-uw-rm-brl="false">Currency
+								Converter »</a>
+						</div>
 					</div>
-					<div class="card-footer text-center">
-						<a href="#"
-						   class="btn btn-large orange-text a_learnmore" id="Currency Rate" subcat="Foreign Currency"
-						   pos="4" cat="Foreign Currency" list="Popular Products" data-uw-rm-brl="false">Currency
-							Converter »</a>
-					</div>
-				</div>
+				}
 			</div>
 			<p class="text-right font-weight-bold m-3 ">
 				<a asp-controller="ReadProducts" asp-action="Index" data-uw-rm-brl="false">
@@ -250,11 +261,12 @@
 			</p>
 		</div>
 	</div>
+}
 
 @if (Model.Offers.Any())
 {
 	<div class="wrapper white-bg strategic-campaign-new">
-		<div class="container more-offers" style="margin-top:0px;">
+		<div class="container more-offers" style="margin-top:0;">
 			<h2>Latest offers</h2>
 			<div id="carousel-example-multi" class="carousel slide carousel-fade carousel-multi-item v-2"
 			     data-touch="true" data-keyboard="true">

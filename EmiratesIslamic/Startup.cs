@@ -31,6 +31,7 @@ public class Startup
         services.AddScoped<IRepository<Function>, Repository<Function>>();
         services.AddScoped<IProductsRepository, ProductsRepository>();
         services.AddScoped<IOffersRepository, OffersRepository>();
+        services.AddScoped<ICurrenciesRepository, CurrenciesRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddScoped<IPhotosRepository, PhotosRepository>();

@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Uis\Base\" />
-    <Folder Include="Controllers\Uis\Dashboard\" />
     <Folder Include="Core\Repositories\" />
     <Folder Include="CustomAttributes\Validation\" />
     <Folder Include="wwwroot\images\offers\" />

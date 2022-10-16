@@ -11,10 +11,13 @@ public class HomeViewModel
 
     public IEnumerable<Offer> Offers { get; set; }
 
+    public IEnumerable<Currency> Currencies { get; set; }
+
     public HomeViewModel()
     {
         Functions = new List<Function>();
         Products = new List<Product>();
         Offers = new List<Offer>();
+        Currencies = new List<Currency>();
     }
 }

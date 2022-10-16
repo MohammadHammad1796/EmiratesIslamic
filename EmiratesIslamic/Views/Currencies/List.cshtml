@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Currency>
+
+@{
+	ViewData["title"] = "Currencies list";
+}
+
+	<h2>Currencies</h2>
+
+@if (Model.Any())
+	{
+		<table class="table" id="currencies">
+			<thead>
+			<tr>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Buy</th>
+				<th>Sell</th>
+				<th>Available ?</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var currency in Model)
+			{
+				<tr id="currency_@currency.Code">
+					<td>@currency.Code</td>
+					<td>@currency.Name</td>
+					<td>@currency.Buy</td>
+					<td>@currency.Sell</td>
+					<td>@if (currency.IsAvailable)
+					    {
+						    <span>Yes</span>
+					    }
+					    else
+					    {
+						    <span>No</span>
+					    }
+					</td>
+					<td>
+						<a role="button" asp-controller="Currencies" asp-action="Edit" asp-route-code="@currency.Code" class="btn btn-warning mr-3">Edit <i class="fa fa-edit"></i></a>
+					</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+
+	}
+	else
+	{
+		<p>There is no currencies yet</p>
+	}
+
+@section Styles
+{
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+}
+
+@section Scripts
+{
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+	<script>
+		$ = window.$;
+		$(document).ready(function() {
+			if ($("#currencies").length)
+				$('#currencies').DataTable();
+		});
+	</script>
+}

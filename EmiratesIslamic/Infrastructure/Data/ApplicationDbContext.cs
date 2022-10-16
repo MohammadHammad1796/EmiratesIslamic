@@ -15,4 +15,13 @@ public class ApplicationDbContext : DbContext
     public DbSet<Product> Products { get; set; }
 
     public DbSet<Offer> Offers { get; set; }
+
+    public DbSet<Currency> Currencies { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Currency>().HasKey(c => c.Code);
+    }
 }

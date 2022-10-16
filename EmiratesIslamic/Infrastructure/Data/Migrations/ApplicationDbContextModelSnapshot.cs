@@ -18,6 +18,31 @@ namespace EmiratesIslamic.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EmiratesIslamic.Core.Models.Currency", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(5)")
+                        .HasMaxLength(5);
+
+                    b.Property<float>("Buy")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<float>("Sell")
+                        .HasColumnType("real");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("Currencies");
+                });
+
             modelBuilder.Entity("EmiratesIslamic.Core.Models.Function", b =>
                 {
                     b.Property<int>("Id")

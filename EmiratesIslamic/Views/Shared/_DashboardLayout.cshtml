@@ -156,47 +156,26 @@
 			<div class="position-sticky pt-3">
 				<ul class="nav flex-column">
 					@{
-						var actionLinks = new List<Dictionary<string, string>>()
+						var actionLinks = new List<ActionLinkViewModel>()
 						{
-							new()
-							{
-								{ "controller", nameof(DashboardController) },
-								{ "action", nameof(DashboardController.Index) },
-								{ "title", "Dashboard" }
-							},
-							new()
-							{
-								{ "controller", nameof(FunctionsController) },
-								{ "action", nameof(FunctionsController.Index) },
-								{ "title", "Functions" }
-							},
-							new()
-							{
-								{ "controller", nameof(ProductsController) },
-								{ "action", nameof(ProductsController.Index) },
-								{ "title", "Products" }
-							},
-							new()
-							{
-								{ "controller", nameof(OffersController) },
-								{ "action", nameof(OffersController.Index) },
-								{ "title", "Offers" }
-							}
+							new(nameof(DashboardController), nameof(DashboardController.Index), "Dashboard"),
+							new(nameof(FunctionsController), nameof(FunctionsController.Index), "Functions"),
+							new(nameof(ProductsController), nameof(ProductsController.Index), "Products"),
+							new(nameof(OffersController), nameof(OffersController.Index), "Offers"),
+							new(nameof(CurrenciesController), nameof(CurrenciesController.Index), "Currencies")
 						};
-						for (var i = 0; i < actionLinks.Count; i++)
-							actionLinks.ElementAt(i)["controller"] = actionLinks.ElementAt(i)["controller"].Split("Controller")[0];
-						
+
 						var currentController = ViewContext.ActionDescriptor.RouteValues["controller"];
 						var currentAction = ViewContext.ActionDescriptor.RouteValues["action"];
 
 						foreach (var actionLink in actionLinks)
 						{
 							var className =
-								actionLink["controller"] == currentController &&
-								actionLink["action"] == currentAction ?
+								actionLink.Controller == currentController &&
+								actionLink.Action == currentAction ?
 									"active" : string.Empty;
 							<li class="@className">
-								<a class="nav-link" asp-controller="@actionLink["controller"]" asp-action="@actionLink["action"]">@actionLink["title"]</a>
+								<a class="nav-link" asp-controller="@actionLink.Controller" asp-action="@actionLink.Action">@actionLink.Title</a>
 							</li>
 							<li>
 								<hr style="width: 100%;"/>

@@ -14,13 +14,16 @@ public class HomeController : BaseClientUiController
     private readonly IProductsRepository _productsRepository;
     private readonly IOffersRepository _offersRepository;
     private readonly IRepository<Function> _functionsRepository;
+    private readonly ICurrenciesRepository _currenciesRepository;
 
     public HomeController(IProductsRepository productsRepository,
-        IOffersRepository offersRepository, IRepository<Function> functionsRepository)
+        IOffersRepository offersRepository, IRepository<Function> functionsRepository,
+        ICurrenciesRepository currenciesRepository)
     {
         _productsRepository = productsRepository;
         _offersRepository = offersRepository;
         _functionsRepository = functionsRepository;
+        _currenciesRepository = currenciesRepository;
     }
 
     [Route("")]
@@ -30,6 +33,7 @@ public class HomeController : BaseClientUiController
         viewModel.Products = await _productsRepository.GetLatestAsync(3);
         viewModel.Offers = await _offersRepository.GetLatestAsync(3);
         viewModel.Functions = await _functionsRepository.GetAllAsync();
+        viewModel.Currencies = await _currenciesRepository.GetAvailableAsync();
 
         return View("Index", viewModel);
     }
