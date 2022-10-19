@@ -3,12 +3,14 @@ using EmiratesIslamic.Controllers.Uis.ViewModels;
 using EmiratesIslamic.Core.Models;
 using EmiratesIslamic.Core.Repositories;
 using EmiratesIslamic.CustomAttributes.Route;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace EmiratesIslamic.Controllers.Uis.Dashboard;
 
 [DashboardRoute("products")]
+[Authorize(Roles = "Sales Supervisor, Admin")]
 public class ProductsController : BaseDashboardUiController
 {
     private readonly IProductsRepository _productsRepository;
@@ -95,7 +97,7 @@ public class ProductsController : BaseDashboardUiController
             previousImagePath = product.ImagePath;
             var imagePath = await _photosRepository.SaveAsync(viewModel.Image!, "products");
             if (string.IsNullOrWhiteSpace(imagePath))
-                return RedirectToAction("Edit", new { id = viewModel.Id, viewModel = viewModel });
+                return RedirectToAction("Edit", new { id = viewModel.Id, viewModel });
             product.ImagePath = imagePath;
         }
 
@@ -103,7 +105,7 @@ public class ProductsController : BaseDashboardUiController
         product.Text = viewModel.Text;
         var savedSuccessfully = await _unitOfWork.SaveChangesAsync();
         if (!savedSuccessfully)
-            return RedirectToAction("Edit", new { id = viewModel.Id, viewModel = viewModel });
+            return RedirectToAction("Edit", new { id = viewModel.Id, viewModel });
 
         if (!string.IsNullOrWhiteSpace(previousImagePath))
             _photosRepository.Delete(previousImagePath);

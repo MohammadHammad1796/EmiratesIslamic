@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EmiratesIslamic.Core.Services
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 	
@@ -53,8 +55,7 @@
 								id="icon_search" onclick="openSearchNav()" data-uw-rm-kbnav="click"></i>
 						</li>
 						@{
-							//var adminOrEmployee = SignInManager.IsSignedIn(User);
-							var adminOrEmployee = true;
+							var adminOrEmployee = SignInManager.IsSignedIn(User);
 							if (adminOrEmployee)
 							{
 								<li class="lang-tab d-none d-md-block">
@@ -70,17 +71,51 @@
 						}
 
 						<li class="login-tab">
-							<a id="loginDiv" href="javascript:void(0);" onclick="loginClick()" data-uw-rm-brl="exc"
-								data-uw-rm-kbnav="click">LOG IN</a>
+							@inject ISignInManager SignInManager
+						@if (SignInManager.IsSignedIn(User))
+						{
+							<a id="loginDiv" onclick="loginClick()" asp-controller="Account" asp-action="Logout" data-uw-rm-brl="exc"
+							   data-uw-rm-kbnav="click">LOG OUT</a>
+						}
+						else
+						{
+							<a id="loginDiv" onclick="loginClick()" asp-controller="Account" asp-action="Login" data-uw-rm-brl="exc"
+							   data-uw-rm-kbnav="click">LOG IN</a>
+						}
+							
 							<div id="myLogin" class="login-block">
 								<ul class="login-list">
+								@if (SignInManager.IsSignedIn(User))
+									{
+										<li>
+											<a asp-controller="Account" asp-action="ChangeEmail" data-uw-rm-brl="false">
+												<i class="fa fa-angle-right fa-2x"
+												   style="font-weight: bold; font-size: 2.2em"></i>
+												Change email
+											</a>
+										</li>
+										<li>
+											<a asp-controller="Account" asp-action="ChangePassword" data-uw-rm-brl="false">
+												<i class="fa fa-angle-right fa-2x"
+												   style="font-weight: bold; font-size: 2.2em"></i>
+												Change password
+											</a>
+										</li>
+										<li>
+											<a asp-controller="Account" asp-action="ChangePersonalInfo" data-uw-rm-brl="false">
+												<i class="fa fa-angle-right fa-2x"
+												   style="font-weight: bold; font-size: 2.2em"></i>
+												Change presonal info
+											</a>
+										</li>
+									}
 									<li class="online-banking-tab">
 										<a href="#" data-uw-rm-brl="false">Online Banking</a>
 									</li>
 									<li>
 										<a href="#" data-uw-rm-brl="false">
 											<i class="fa fa-angle-right fa-2x"
-												style="font-weight: bold; font-size:2.2em"></i>
+											   style="font-weight: bold; font-size: 2.2em"></i>
 											businessONLINE
 										</a>
 									</li>
@@ -88,16 +123,18 @@
 								<div class="login-ad download-app">
 									<h5>Have you tried our Mobile Banking App?</h5>
 									<a href="#"
-										data-uw-rm-brl="false"><img src="/images/mobile-banking-app-ad.jpg" width="300"
-											height="220" alt="Mobile Banking App" title="Mobile Banking App"
-											data-uw-rm-ima-original="mobile banking app"></a>
+									   data-uw-rm-brl="false">
+										<img src="/images/mobile-banking-app-ad.jpg" width="300"
+										     height="220" alt="Mobile Banking App" title="Mobile Banking App"
+										     data-uw-rm-ima-original="mobile banking app"></a>
 									<ul class="mt-3">
 										<li>
 											<a href="https://play.google.com/store/apps/details?id=com.s4m"
-												target="_blank"
-												aria-label="get it on google play - target website may not be available - opens in new tab"
-												data-uw-rm-brl="true" data-uw-rm-ext-link=""
-												uw-rm-external-link-id="https://play.google.com/store/apps/details?id=com.s4m$getitongoogleplay-targetwebsitemaynotbeavailable"><img
+											   target="_blank"
+											   aria-label="get it on google play - target website may not be available - opens in new tab"
+											   data-uw-rm-brl="true" data-uw-rm-ext-link=""
+											   uw-rm-external-link-id="https://play.google.com/store/apps/details?id=com.s4m$getitongoogleplay-targetwebsitemaynotbeavailable">
+												<img
 													src="/images/google-play-badge.png" alt="Get it on Google Play"
 													title="Get it on Google Play" width="145" height="43"
 													class="app-badge"
@@ -105,10 +142,11 @@
 										</li>
 										<li>
 											<a href="https://itunes.apple.com/app/apple-store/id516976912?pt=1088222&amp;ct=App%20on%20website&amp;mt=8"
-												target="_blank" data-uw-rm-brl="false"
-												aria-label="Download on the App Store - opens in new tab"
-												data-uw-rm-ext-link=""
-												uw-rm-external-link-id="https://itunes.apple.com/app/apple-store/id516976912?pt=1088222&amp;ct=app%20on%20website&amp;mt=8$downloadontheappstore"><img
+											   target="_blank" data-uw-rm-brl="false"
+											   aria-label="Download on the App Store - opens in new tab"
+											   data-uw-rm-ext-link=""
+											   uw-rm-external-link-id="https://itunes.apple.com/app/apple-store/id516976912?pt=1088222&amp;ct=app%20on%20website&amp;mt=8$downloadontheappstore">
+												<img
 													src="/images/app-store-badge.png" width="145" height="50"
 													alt="Download on the App Store" title="Download on the App Store"
 													class="app-badge"
@@ -129,7 +167,7 @@
 	</header>
 
 	<div id="SearchPanel" class="sidepanel" data-swiftype-index="false"
-		style="padding-top: 0px; width: 0%; height: 0%;">
+		style="padding-top: 0; width: 0; height: 0%;">
 		<header class="d-none d-sm-block w-100">
 			<div class="container" data-swiftype-index="false">
 				<div class="row">

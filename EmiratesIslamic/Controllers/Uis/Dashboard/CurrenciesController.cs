@@ -2,12 +2,14 @@
 using EmiratesIslamic.Core.Models;
 using EmiratesIslamic.Core.Repositories;
 using EmiratesIslamic.CustomAttributes.Route;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace EmiratesIslamic.Controllers.Uis.Dashboard;
 
 [DashboardRoute("currencies")]
+[Authorize(Roles = "Sales Supervisor, Admin")]
 public class CurrenciesController : BaseDashboardUiController
 {
     private readonly ICurrenciesRepository _currenciesRepository;

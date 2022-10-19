@@ -1,6 +1,7 @@
 ﻿using EmiratesIslamic.Core.Models;
 using EmiratesIslamic.Core.Repositories;
 using EmiratesIslamic.CustomAttributes.Route;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace EmiratesIslamic.Controllers.Apis;
 
 [ApiRoute("functions")]
+[Authorize(Roles = "Services Supervisor, Admin")]
 public class FunctionsController : Controller
 {
     private readonly IRepository<Function> _functionsRepository;

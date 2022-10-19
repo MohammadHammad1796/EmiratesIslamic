@@ -1,0 +1,74 @@
+﻿@model UserFormViewModel
+
+@{
+	var title = Model.Id == 0 ? "Create user" : "Update user data";
+	ViewData["title"] = title;
+	var actionName = Model.Id == 0 ? 
+		nameof(UsersController.Create) : nameof(UsersController.Edit);
+}
+
+	<h2>@title</h2>
+	<div class="row">
+		<form class="col-md-6" asp-controller="Users" asp-action="@actionName" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label asp-for="FullName"></label>
+				<input asp-for="FullName" class="form-control"/>
+				<span asp-validation-for="FullName"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Email"></label>
+				<input asp-for="Email" class="form-control"/>
+				<span asp-validation-for="Email"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PhoneNumber"></label>
+				<input asp-for="PhoneNumber" class="form-control"/>
+				<span asp-validation-for="PhoneNumber"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="RoleId"></label>
+				<select asp-for="RoleId" class="form-control">
+					@{
+						var roles = ViewData["roles"] as IEnumerable<Role>;
+						foreach (var role in roles!)
+						{
+							<option value="@role.Id">@role.Name</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="RoleId"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Image"></label>
+				<input asp-for="Image" type="file" class="form-control" accept=".jpg,.jpeg"/>
+				<span asp-validation-for="Image"></span>
+			</div>
+			<input type="hidden" asp-for="Id"/>
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="reset" class="btn btn-secondary">Reset</button>
+		</form>
+		<div class="col-md-6" style="text-align: center;">
+			@{
+				if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+				{
+						<p class="h1">Previous Image</p>
+						<img src="\@Model.ImagePath" alt="@Model.FullName"/>
+				}
+			}
+		</div>
+	</div>
+
+@section Styles
+{
+	<style>
+		.field-validation-error {
+			color: #F00;
+		}
+	</style>
+}
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial"/>
+	<script src="/js/customValidators.js" asp-append-version="true"></script>
+}

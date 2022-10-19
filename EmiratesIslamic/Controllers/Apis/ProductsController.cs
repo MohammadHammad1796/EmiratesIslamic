@@ -1,5 +1,6 @@
 ﻿using EmiratesIslamic.Core.Repositories;
 using EmiratesIslamic.CustomAttributes.Route;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace EmiratesIslamic.Controllers.Apis;
 
 [ApiRoute("products")]
+[Authorize(Roles = "Sales Supervisor, Admin")]
 public class ProductsController : Controller
 {
     private readonly IProductsRepository _productsRepository;

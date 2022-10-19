@@ -7,6 +7,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100020_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100020_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100422_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100422_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100939_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017100939_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101139_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101139_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101235_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101235_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101526_SeedInitialIdentityData.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017101526_SeedInitialIdentityData.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017132657_AddIdentityTables.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017132657_AddIdentityTables.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017152506_ssd.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017152506_ssd.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017152956_ssd.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017152956_ssd.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194230_ssd.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194230_ssd.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194321_ssd.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194321_ssd.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194726_ssd.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221017194726_ssd.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.25">
       <PrivateAssets>all</PrivateAssets>
@@ -23,6 +52,7 @@
     <Folder Include="Controllers\Uis\Base\" />
     <Folder Include="Core\Repositories\" />
     <Folder Include="CustomAttributes\Validation\" />
+    <Folder Include="wwwroot\images\users\" />
     <Folder Include="wwwroot\images\offers\" />
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>

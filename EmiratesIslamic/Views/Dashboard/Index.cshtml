@@ -1,3 +1,28 @@
-﻿<main class="container">
+﻿@using System.Security.Claims
+<main class="container">
 	<h2>Dashboard</h2>
+	@{
+		var userRole = User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+		var actionLinks = ActionLinkViewModel.GetByRole(userRole.ToLower());
+			<div class="row">
+				@foreach (var actionLink in actionLinks)
+			{
+				<div class="col-md-1 mb-3"></div>
+				<a role="button" class="col-md-5 card justify-content-center align-items-center mb-3" style="height: 100px;" asp-controller="@actionLink.Controller" asp-action="@actionLink.Action">@actionLink.Title</a>
+			}
+			</div>
+	}
 </main>
+
+@section Styles{
+	<style>
+		.col-md-5.card.justify-content-center.align-items-center {
+			color: #000;
+		}
+		.col-md-5.card.justify-content-center.align-items-center:hover {
+			background-color: var(--secondary);
+			color: white;
+			cursor: pointer;
+		}
+	</style>
+}

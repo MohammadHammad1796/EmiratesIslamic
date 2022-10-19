@@ -1,0 +1,72 @@
+﻿@model LoginViewModel
+
+@{
+	ViewData["Title"] = "Login";
+}
+
+<main class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<section>
+				<form id="account" method="post" asp-controller="Account" asp-action="Login">
+					<div asp-validation-summary="All" class="text-danger"></div>
+					<div class="mb-3">
+						<label asp-for="Email"></label>
+						<input asp-for="Email" class="form-control" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="Password"></label>
+						<div class="input-group" id="show_hide_password">
+							<input class="form-control passwordDisplay" asp-for="Password">
+							<div class="input-group-addon">
+								<a href="" class="form-control" tabindex="-1">
+									<i class="fa fa-eye-slash" aria-hidden="true"></i>
+								</a>
+							</div>
+						</div>
+						<span asp-validation-for="Password" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<div class="checkbox">
+							<label asp-for="RememberMe">
+								<input asp-for="RememberMe" />
+								@Html.DisplayNameFor(m => m.RememberMe)
+							</label>
+						</div>
+					</div>
+					<div class="mb-3">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+					<div class="mb-3">
+						<p>
+							<a id="forgot-password" asp-controller="Account" asp-action="ForgotPassword" >Forgot password</a>
+						</p>
+					</div>
+					<input type="hidden" asp-for="ReturnUrl"/>
+				</form>
+			</section>
+		</div>
+	</div>
+</main>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+		$(document).ready(function () {
+			$("#show_hide_password a").on('click', function (event) {
+				event.preventDefault();
+				if ($('#show_hide_password input').attr("type") == "text") {
+					$('.passwordDisplay').attr('type', 'password');
+					$('#show_hide_password i').addClass("fa-eye-slash");
+					$('#show_hide_password i').removeClass("fa-eye");
+				} else if ($('#show_hide_password input').attr("type") == "password") {
+					$('.passwordDisplay').attr('type', 'text');
+					$('#show_hide_password i').removeClass("fa-eye-slash");
+					$('#show_hide_password i').addClass("fa-eye");
+				}
+			});
+		});
+	</script>
+}
