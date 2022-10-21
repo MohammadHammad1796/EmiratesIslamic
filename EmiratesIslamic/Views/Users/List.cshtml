@@ -35,7 +35,6 @@
 						<img src="\@user.ImagePath" alt="@user.FullName"/>
 					</td>
 					<td>
-						<a role="button" target="_blank" asp-controller="Users" asp-action="GetById" asp-route-id="@user.Id" class="btn btn-info mr-3">View <i class="fa fa-eye"></i></a>
 						<a role="button" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning mr-3">Edit <i class="fa fa-edit"></i></a>
 						<a role="button" href="#" class="btn btn-secondary" data-id="@user.Id">Delete <i class="fa fa-trash"></i></a>
 					</td>

@@ -147,8 +147,8 @@
 										{
 											currentIndex = productsOfferingCount - 6;
 										}
-
-										<div class="carousel-item">
+										var classActive = i == 0 ? "active" : string.Empty;
+										<div class="carousel-item @classActive">
 											<div class="row">
 												@{var round = 0;}
 												@while (currentIndex < productsOfferingCount && round < 6)

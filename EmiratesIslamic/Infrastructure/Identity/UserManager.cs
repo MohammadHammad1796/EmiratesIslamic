@@ -40,7 +40,8 @@ public class UserManager : IUserManager
             ImagePath = user.ImagePath
         };
 
-        var identityResult = await _userManager.CreateAsync(appUser);
+        var defaultPassword = user.Email;
+        var identityResult = await _userManager.CreateAsync(appUser, defaultPassword);
         return new Result()
         {
             Succeeded = identityResult.Succeeded,
