@@ -325,7 +325,7 @@ public class AccountController : BaseClientUiController
 
         user.FullName = viewModel.FullName;
         user.PhoneNumber = viewModel.PhoneNumber;
-        var result = await _userManager.UpdateAsync();
+        var result = await _userManager.UpdateAsync(user);
         if (!result.Succeeded)
         {
             foreach (var error in result.Errors)

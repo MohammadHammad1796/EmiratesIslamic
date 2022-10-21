@@ -144,7 +144,13 @@ public class UsersController : BaseDashboardUiController
         user.PhoneNumber = viewModel.PhoneNumber;
         user.FullName = viewModel.FullName;
         user.UserName = viewModel.Email;
-
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(error.Code, error.Description);
+            return View("Form", viewModel);
+        }
         if (user.RoleId != viewModel.RoleId)
         {
             var previousRole = _rolesExceptAdmin
@@ -152,7 +158,7 @@ public class UsersController : BaseDashboardUiController
             var newRole = _rolesExceptAdmin
                 .Single(r => r.Id == viewModel.RoleId);
 
-            var result = await _userManager.RemoveFromRoleAsync(previousRole.Name);
+            result = await _userManager.RemoveFromRoleAsync(previousRole.Name);
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)

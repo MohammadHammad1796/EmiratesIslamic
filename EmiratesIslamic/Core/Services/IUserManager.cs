@@ -44,5 +44,5 @@ public interface IUserManager
 
     Task<Result> ChangePasswordAsync(string currentPassword, string newPassword);
 
-    Task<Result> UpdateAsync();
+    Task<Result> UpdateAsync(User user);
 }

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using EmiratesIslamic.Core.Helpers;
+﻿using EmiratesIslamic.Core.Helpers;
 using EmiratesIslamic.Core.Models;
 using EmiratesIslamic.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace EmiratesIslamic.Infrastructure.Identity;
 
@@ -185,8 +185,15 @@ public class UserManager : IUserManager
         return InitializeResultFromIdentityResult(identityResult);
     }
 
-    public async Task<Result> UpdateAsync()
+    public async Task<Result> UpdateAsync(User user)
     {
+        _currentUser.FullName = user.FullName;
+        _currentUser.PhoneNumber = user.PhoneNumber;
+        _currentUser.Email = user.Email;
+        _currentUser.Email = user.UserName;
+        if (!string.IsNullOrWhiteSpace(user.ImagePath))
+            _currentUser.ImagePath = user.ImagePath;
+
         var identityResult = await _userManager.UpdateAsync(_currentUser);
         return InitializeResultFromIdentityResult(identityResult);
     }
