@@ -51,8 +51,15 @@ public class AccountController : BaseClientUiController
 
         viewModel.ReturnUrl ??= "/";
 
+        var user = await _userManager.FindByEmailAsync(viewModel.Email);
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "Failed login attemp");
+            return View(viewModel);
+        }
+
         var succeeded = await _signInManager
-            .PasswordSignInAsync(viewModel.Email, viewModel.Password,
+            .PasswordSignInAsync(user.UserName, viewModel.Password,
                 viewModel.RememberMe, lockoutOnFailure: false);
         if (succeeded)
             return LocalRedirect(viewModel.ReturnUrl);
