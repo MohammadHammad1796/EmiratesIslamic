@@ -10,6 +10,7 @@ namespace EmiratesIslamic.Infrastructure.Services;
 public class PhotosRepository : IPhotosRepository
 {
     private readonly string _webRootPath;
+    private const string MainImagesFolder = "images";
 
     public PhotosRepository(IWebHostEnvironment hostingEnvironment)
     {
@@ -18,7 +19,10 @@ public class PhotosRepository : IPhotosRepository
 
     public async Task<string> SaveAsync(IFormFile file, string categoryFolder)
     {
-        var relativePath = Path.Combine("images", categoryFolder);
+        if (!ValidateFolderExist(categoryFolder))
+            return string.Empty;
+
+        var relativePath = Path.Combine(MainImagesFolder, categoryFolder);
         relativePath = Path.Combine(relativePath, Guid.NewGuid().ToString());
         relativePath = string.Concat(relativePath, Path.GetExtension(file.FileName));
         var fullPath = Path.Combine(_webRootPath, relativePath);
@@ -46,5 +50,22 @@ public class PhotosRepository : IPhotosRepository
         {
             return false;
         }
+    }
+
+    private bool ValidateFolderExist(string folder)
+    {
+        var path = Path.Combine(_webRootPath, MainImagesFolder, folder);
+        if (Directory.Exists(path)) return true;
+
+        try
+        {
+            Directory.CreateDirectory(path);
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

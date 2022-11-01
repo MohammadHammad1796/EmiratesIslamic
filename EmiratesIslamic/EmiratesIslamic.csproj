@@ -31,6 +31,8 @@
     <Compile Remove="Infrastructure\Data\Migrations\20221017194321_ssd.Designer.cs" />
     <Compile Remove="Infrastructure\Data\Migrations\20221017194726_ssd.cs" />
     <Compile Remove="Infrastructure\Data\Migrations\20221017194726_ssd.Designer.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221101172648_UpdateAdminIdAndPassword.cs" />
+    <Compile Remove="Infrastructure\Data\Migrations\20221101172648_UpdateAdminIdAndPassword.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
